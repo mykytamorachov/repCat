@@ -14,14 +14,9 @@
  */
 angular.module('repCat.home', [
     'ui.router',
-    'plusOne',
-    'pascalprecht.github-adapter'
+    'plusOne'
 ])
-    .constant("myConfig", {
-        "url": "https://api.github.com/",
-        "oAuthToken": "81ef23d77111610ea4a52c4ed13505c7980a678f",
-        "gitHubUsername":"mykytamorachov"
-    })
+
 
 /**
  * Each section or module of the site can also have its own routes. AngularJS
@@ -42,41 +37,23 @@ angular.module('repCat.home', [
         }
     });
 })
-.config(function ($githubProvider, myConfig) {
-  $githubProvider.token(myConfig.oAuthToken);
-  $githubProvider.authType('oauth');
-})
-
 /**
  * And of course we define a controller for our route.
  */
-.controller('HomeCtrl', function HomeController($scope, $http, $github, myConfig) {
-  var github = new Github({
-    token: myConfig.oAuthToken,
-    auth: "oauth"
-  });
-  var repo = github.getRepo("mykytamorachov", "repCat");
-  repo.show(function(err, repo) {
-    console.log(repo);
-  });
+.controller('HomeCtrl', function HomeController($scope, $http) {
+  
 
-    // $http({
-    //     method: 'GET',
-    //     url: 'https://api.github.com/mykytamorachov/repos',
-    //     headers:{
-    //       'Authorization':'Basic bXlreXRhbW9yYWNob3Y6RHJlYWQxMDA3OTA='
-    //     }
-    // }).
-    // success(function(data, status, headers, config) {
-    //     console.log(data);
-    //     // this callback will be called asynchronously
-    //     // when the response is available
-    // }).
-    // error(function(data, status, headers, config) {
-    //     alert(data);
-    //     // called asynchronously if an error occurs
-    //     // or server returns response with an error status.
-    // });
+    $http.get('https://api.github.com/repositories').
+    success(function(data, status, headers, config) {
+      $scope.repositories = data;
+        // this callback will be called asynchronously
+        // when the response is available
+    }).
+    error(function(data, status, headers, config) {
+        alert(data);
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
 })
 
 ;
