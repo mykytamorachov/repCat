@@ -105,6 +105,12 @@ module.exports = function ( grunt ) {
             dest: '<%= build_dir %>/assets/',
             cwd: 'src/assets',
             expand: true
+          },
+          { 
+            src: [ '**' ],
+            dest: '<%= build_dir %>/lib/',
+            cwd: 'src/lib',
+            expand: true
           }
        ]   
       },
@@ -307,7 +313,7 @@ module.exports = function ( grunt ) {
 
     /**
      * `coffeelint` does the same as `jshint`, but for CoffeeScript.
-     * CoffeeScript is not the default in ngBoilerplate, so we're just using
+     * CoffeeScript is not the default in repCat, so we're just using
      * the defaults here.
      */
     coffeelint: {
