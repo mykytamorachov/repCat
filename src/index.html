@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html ng-app="repCat" ng-controller="AppCtrl">
-  <head>
-    <title ng-bind="pageTitle"></title>
-
-    <!-- social media tags -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@joshdmiller">
-    <meta name="twitter:title" content="repCat">
-    <meta name="twitter:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
-    <meta name="twitter:creator" content="@joshdmiller">
-    <meta name="twitter:image:src" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846">
-    <meta property="og:title" content="repCat" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://bit.ly/repCat" />
-    <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846" />
-    <meta property="og:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- font awesome from BootstrapCDN -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
-
-    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
-
-    <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      { "parsetags": "explicit" }
-    </script>
-  </head>
-  <body>
-    <div class="container" ui-view="main"></div>
-
-    <footer class="footer">
-    </footer>
-  </body>
+    <head>
+        <title ng-bind="pageTitle"></title>
+        <!-- social media tags -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@joshdmiller">
+        <meta name="twitter:title" content="repCat">
+        <meta name="twitter:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
+        <meta name="twitter:creator" content="@joshdmiller">
+        <meta name="twitter:image:src" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846">
+        <meta property="og:title" content="repCat" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://bit.ly/repCat" />
+        <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846" />
+        <meta property="og:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- font awesome from BootstrapCDN --><!--
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="vendor/materialize/dist/css/materialize.css" rel="stylesheet"> -->
+        ''
+        <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script><% }); %>
+        <!-- it's stupid to have to load it here, but this is for the +1 button -->
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+        { "parsetags": "explicit" }
+        </script>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#/home" class="brand-logo">Logo</a>
+                <a href data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars"></i>
+      
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class='active'><a href="#/home">Home</a></li>
+                    <li><a href="#/catalogues">Catalogues</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li class='active'><a href="#/home">Home</a></li>
+                    <li><a href="#/catalogues">Catalogues</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" ui-view="main"></div>
+        <div class="container" ui-view="info"></div>
+        <footer class="footer">
+        </footer>
+    </body>
 </html>

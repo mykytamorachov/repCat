@@ -2,7 +2,7 @@ angular.module( 'repCat', [
   'templates-app',
   'templates-common',
   'repCat.home',
-  'repCat.about',
+  'repCat.catalogues',
   'ui.router'
 ])
 

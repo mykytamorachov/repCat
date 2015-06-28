@@ -1,7 +1,33 @@
-<div class="jumbotron">
- <ul>
-   <li ng-repeat="rep in repositories">{{rep.name}}</li>
- </ul>
+<div class="progress" ng-hide='repositories.length'>
+	<div class="indeterminate"></div>
 </div>
-
-
+<ul class="collection" ng-show='repositories.length'>
+	<li ng-repeat="rep in repositories|
+		offset: currentPage*itemsPerPage |
+		limitTo: itemsPerPage"
+		class="collection-item avatar">
+		<img src="{{rep.owner.avatar_url}}" alt="" class="circle">
+		<span class="title">{{rep.name | uppercase}}</span>
+		<p>{{rep.owner.login}}<br>
+			{{rep.owner.type}}
+		</p>
+		<a href="#!" ng-click='makeFavourite($index)' ng-hide='rep.isFavourite' class="secondary-content"><i class="fa fa-star-o fa-2x"></i></a>
+		<a href="#!" ng-show='rep.isFavourite' class="secondary-content"><i class="fa fa-star fa-2x"></i></a>
+	</li>
+</ul>
+<ul class="pagination center-align" ng-show='repositories.length'>
+	<li ng-class="prevPageDisabled()">
+		<a href ng-click="prevPage()">
+			<i class="fa fa-chevron-left"></i>
+		</a>
+	</li>
+	<li ng-repeat="n in pageCount() track by $index"
+		ng-class="{active: $index == currentPage}" ng-click="setPage($index)" class="waves-effect">
+		<a href>{{$index+1}}</a>
+	</li>
+	<li ng-class="nextPageDisabled()" class="waves-effect">
+		<a href ng-click="nextPage()">
+			<i class="fa fa-chevron-right"></i>
+		</a>
+	</li>
+</ul>

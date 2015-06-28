@@ -12,48 +12,56 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
-angular.module('repCat.home', [
-    'ui.router',
-    'plusOne'
-])
+angular.module('repCat.home')
 
 
-/**
- * Each section or module of the site can also have its own routes. AngularJS
- * will handle ensuring they are all available at run-time, but splitting it
- * this way makes each module more "self-contained".
- */
-.config(function config($stateProvider) {
-    $stateProvider.state('home', {
-        url: '/home',
-        views: {
-            "main": {
-                controller: 'HomeCtrl',
-                templateUrl: 'home/home.tpl.html'
-            }
-        },
-        data: {
-            pageTitle: 'Home'
-        }
-    });
-})
+
+
+
 /**
  * And of course we define a controller for our route.
  */
-.controller('HomeCtrl', function HomeController($scope, $http) {
-  
+.controller('HomeCtrl', function HomeController($scope, $http, repoService) {
+    repoService.getRepos(function(data) {
+        $scope.repositories = data;
+        $scope.itemsPerPage = 10;
+        $scope.currentPage = 0;
+        $scope.pageCount = function() {
+            return new Array(Math.ceil($scope.repositories.length / $scope.itemsPerPage) - 1);
+        };
+        $scope.prevPage = function() {
+            if ($scope.currentPage > 0) {
+                $scope.currentPage--;
+            }
+        };
 
-    $http.get('https://api.github.com/repositories').
-    success(function(data, status, headers, config) {
-      $scope.repositories = data;
-        // this callback will be called asynchronously
-        // when the response is available
-    }).
-    error(function(data, status, headers, config) {
-        alert(data);
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
+        $scope.prevPageDisabled = function() {
+            return $scope.currentPage === 0 ? "disabled" : "";
+        };
+
+        $scope.setPage = function(index) {
+            $scope.currentPage = index;
+        };
+
+        $scope.nextPage = function() {
+            if ($scope.currentPage < $scope.pageCount().length - 1) {
+                $scope.currentPage++;
+            }
+        };
+
+        $scope.nextPageDisabled = function() {
+            return $scope.currentPage === $scope.pageCount().length - 1 ? "disabled" : "";
+        };
     });
+
+    $scope.makeFavourite = function(index){
+        $scope.repositories[index].isFavourite = true;
+    };
+    $scope.reverse = function(){
+        $scope.repositories = angular.copy($scope.repositories.reverse());
+    };
+
+
 })
 
 ;

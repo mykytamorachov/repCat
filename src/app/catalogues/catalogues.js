@@ -1,23 +1,23 @@
-angular.module( 'repCat.about', [
+angular.module( 'repCat.catalogues', [
   'ui.router',
-  'placeholders',
+  // 'placeholders',
   'ui.bootstrap'
 ])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'about', {
-    url: '/about',
+  $stateProvider.state( 'catalogues', {
+    url: '/catalogues',
     views: {
       "main": {
-        controller: 'AboutCtrl',
-        templateUrl: 'about/about.tpl.html'
+        controller: 'CataloguesCtrl',
+        templateUrl: 'catalogues/catalogues.tpl.html'
       }
     },
     data:{ pageTitle: 'What is It?' }
   });
 })
 
-.controller( 'AboutCtrl', function AboutCtrl( $scope ) {
+.controller( 'CataloguesCtrl', function CataloguesCtrl( $scope ) {
   // This is simple a demo for UI Boostrap.
   $scope.dropdownDemoItems = [
     "The first choice!",
