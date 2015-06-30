@@ -18,16 +18,12 @@
         <!-- font awesome from BootstrapCDN --><!--
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="vendor/materialize/dist/css/materialize.css" rel="stylesheet"> -->
-        ''
+        
         <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
         <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
         <script type="text/javascript" src="<%= file %>"></script><% }); %>
-        <!-- it's stupid to have to load it here, but this is for the +1 button -->
-        <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-        { "parsetags": "explicit" }
-        </script>
     </head>
     <body>
         <nav>

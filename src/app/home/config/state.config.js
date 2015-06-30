@@ -1,5 +1,6 @@
 angular.module('repCat.home', [
-    'ui.router'
+    'ui.router',
+    'LocalStorageModule'
 ])
 /**
  * Each section or module of the site can also have its own routes. AngularJS
@@ -19,4 +20,9 @@ angular.module('repCat.home', [
             pageTitle: 'Home'
         }
     });
+})
+.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setPrefix('regCat')
+    .setNotify(true, true);
 });

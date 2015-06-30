@@ -1,10 +1,11 @@
 <div class="progress" ng-hide='repositories.length'>
 	<div class="indeterminate"></div>
 </div>
+<a href="" ng-click="order('id')">Id</a>
 <ul class="collection" ng-show='repositories.length'>
-	<li ng-repeat="rep in repositories|
-		offset: currentPage*itemsPerPage |
-		limitTo: itemsPerPage"
+	<li ng-repeat="rep in repositories | orderBy:predicate:reverse
+	| offset: currentPage*itemsPerPage |
+		limitTo: itemsPerPage "
 		class="collection-item avatar">
 		<img src="{{rep.owner.avatar_url}}" alt="" class="circle">
 		<span class="title">{{rep.name | uppercase}}</span>

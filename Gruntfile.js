@@ -264,22 +264,22 @@ module.exports = function ( grunt ) {
      * Only our `main.less` file is included in compilation; all other files
      * must be imported from this file.
      */
-    less: {
-      build: {
-        files: {
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
-        }
-      },
-      compile: {
-        files: {
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
-        },
-        options: {
-          cleancss: true,
-          compress: true
-        }
-      }
-    },
+    // less: {
+    //   build: {
+    //     files: {
+    //       '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
+    //     }
+    //   },
+    //   compile: {
+    //     files: {
+    //       '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
+    //     },
+    //     options: {
+    //       cleancss: true,
+    //       compress: true
+    //     }
+    //   }
+    // },
 
     /**
      * `jshint` defines the rules of our linter as well as which files we
@@ -518,10 +518,10 @@ module.exports = function ( grunt ) {
       /**
        * When the CSS files change, we need to compile and minify them.
        */
-      less: {
-        files: [ 'src/**/*.less' ],
-        tasks: [ 'less:build' ]
-      },
+      // less: {
+      //   files: [ 'src/**/*.less' ],
+      //   tasks: [ 'less:build' ]
+      // },
 
       /**
        * When a JavaScript unit test file changes, we only want to lint it and
@@ -574,7 +574,8 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
+    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 
+    // 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
     'karma:continuous' 

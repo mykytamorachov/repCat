@@ -21,11 +21,12 @@ angular.module('repCat.home')
 /**
  * And of course we define a controller for our route.
  */
-.controller('HomeCtrl', function HomeController($scope, $http, repoService) {
+.controller('HomeCtrl', function HomeController($scope, $http, repoService,localStorageService) {
     repoService.getRepos(function(data) {
         $scope.repositories = data;
         $scope.itemsPerPage = 10;
         $scope.currentPage = 0;
+        $scope.bindFavorites = localStorageService.bind($scope, 'isFavorites');
         $scope.pageCount = function() {
             return new Array(Math.ceil($scope.repositories.length / $scope.itemsPerPage) - 1);
         };
@@ -54,13 +55,20 @@ angular.module('repCat.home')
         };
     });
 
-    $scope.makeFavourite = function(index){
-        $scope.repositories[index].isFavourite = true;
+    $scope.makeFavourite = function(index) {
+        $scope.isFavorites = [];
+        $scope.isFavorites.push($scope.repositories[index]);
+
     };
-    $scope.reverse = function(){
+    $scope.reverse = function() {
         $scope.repositories = angular.copy($scope.repositories.reverse());
     };
-
+    $scope.predicate = 'id';
+    $scope.reverse = false;
+    $scope.order = function(predicate) {
+        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+        $scope.predicate = predicate;
+    };
 
 })
 

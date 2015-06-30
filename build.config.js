@@ -69,7 +69,8 @@ module.exports = {
             'vendor/angular-ui-utils/modules/route/route.js',
             'vendor/angular-github-adapter.min.js',
             'vendor/jquery/dist/jquery.min.js',
-            'vendor/materialize/dist/js/materialize.js'
+            'vendor/materialize/dist/js/materialize.js',
+            'vendor/angular-local-storage/dist/angular-local-storage.min.js'
         ],
         css: [
             'vendor/materialize/dist/css/materialize.css',
